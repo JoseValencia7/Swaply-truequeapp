@@ -35,6 +35,9 @@ const io = new Server(server, {
   }
 });
 
+// ✅ Render usa proxy, por eso habilitamos confianza en él
+app.set('trust proxy', 1);
+
 // Configurar Socket.io
 configureSocket(io);
 
@@ -84,13 +87,14 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
 app.use(compression());
 
-// CORS
+// ✅ CORS (se agregó dominio de Netlify)
 app.use(cors({
   origin: function (origin, callback) {
     const allowedOrigins = [
       process.env.CLIENT_URL || 'http://localhost:3000',
       'http://localhost:3000',
-      'http://localhost:3001'
+      'http://localhost:3001',
+      'https://lively-elf-21708e.netlify.app' // 🔥 agregado para Netlify
     ];
     
     if (!origin || allowedOrigins.includes(origin)) {

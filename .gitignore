@@ -19,3 +19,10 @@ client/build/
 # MacOS y Windows
 .DS_Store
 Thumbs.db
+
+
+# Archivos de compilación
+dist/
+build/
+coverage/
+
